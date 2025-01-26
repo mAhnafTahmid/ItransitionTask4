@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin", policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:5189", "http://localhost:8080") // Add your frontend URL
+        policy.WithOrigins("http://localhost:5173", "http://localhost:5189", "http://localhost:8080, https://itransitiontask4-frontend.onrender.com") // Add your frontend URL
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
