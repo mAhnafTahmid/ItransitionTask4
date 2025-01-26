@@ -4,14 +4,14 @@ namespace backend.Models;
 
 public class UserModel
 {
-    [Key] // Primary key
+    [Key]
     public int Id { get; set; }
 
     [Required]
     public required string Name { get; set; }
 
     [Required]
-    [EmailAddress] // Ensures the field is a valid email
+    [EmailAddress]
     public required string Email { get; set; }
 
     public DateTime? LastSeen { get; set; }
@@ -26,7 +26,7 @@ public class UserModel
     {
     }
 
-    public UserModel(int id, string name, string email, string password, string status, DateTime lastseen) // Calls the parameterless constructor
+    public UserModel(int id, string name, string email, string password, string status, DateTime lastseen)
     {
         Id = id;
         Name = name;

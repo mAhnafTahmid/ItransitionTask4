@@ -19,7 +19,6 @@ public class LoginController(MyDbContext context, IConfiguration configuration) 
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest request)
     {
-        // Check if user exists with the provided email
         var user = _context.Users.FirstOrDefault(u => u.Email == request.Email);
 
         if (user == null)
@@ -31,14 +30,11 @@ public class LoginController(MyDbContext context, IConfiguration configuration) 
             return Unauthorized(new { Error = "Invalid password." });
         }
 
-        // Generate tokens
         var authToken = GenerateJwtToken(user);
 
-        // Update the user's LastSeen field and save changes
         user.LastSeen = DateTime.UtcNow;
         _context.SaveChanges();
 
-        // Return tokens in response
         return Ok(new
         {
             AuthToken = authToken,
@@ -48,7 +44,7 @@ public class LoginController(MyDbContext context, IConfiguration configuration) 
     private string GenerateJwtToken(UserModel user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var jwtKey = Environment.GetEnvironmentVariable("SecretKey"); // Get the key from an environment variable
+        var jwtKey = Environment.GetEnvironmentVariable("SecretKey");
 
         if (string.IsNullOrEmpty(jwtKey))
         {
@@ -64,7 +60,7 @@ public class LoginController(MyDbContext context, IConfiguration configuration) 
                 new Claim(ClaimTypes.Name, user.Name),
             new Claim(ClaimTypes.Email, user.Email)
             ]),
-            Expires = DateTime.UtcNow.AddMinutes(15), // Auth token validity
+            Expires = DateTime.UtcNow.AddMinutes(15),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
 
@@ -74,7 +70,6 @@ public class LoginController(MyDbContext context, IConfiguration configuration) 
 
 }
 
-// Request model for login
 public class LoginRequest
 {
     public required string Email { get; set; }

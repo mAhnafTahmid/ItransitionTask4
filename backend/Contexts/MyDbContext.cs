@@ -12,7 +12,6 @@ public class MyDbContext(DbContextOptions<MyDbContext> options) : DbContext(opti
     {
         base.OnModelCreating(modelBuilder);
 
-        // Ensure Email and Username are unique
         modelBuilder.Entity<UserModel>()
             .HasIndex(u => u.Email)
             .IsUnique();

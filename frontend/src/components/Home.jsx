@@ -19,8 +19,8 @@ const Home = () => {
         {
           method: "GET",
           headers: {
-            Authorization: `Bearer ${token}`, // Set JWT token in the Authorization header
-            "Content-Type": "application/json", // Optional, depending on the content type
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         }
       );
@@ -50,20 +50,19 @@ const Home = () => {
         const response = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/users`,
           {
-            method: "GET", // or 'POST', depending on your API
+            method: "GET",
             headers: {
-              Authorization: `Bearer ${token}`, // Set JWT token in the Authorization header
-              "Content-Type": "application/json", // Optional, depending on the content type
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
             },
           }
         );
         const data = await response.json();
         if (response.ok) {
-          // Add `isSelected: false` to each user
           const updatedUsers = data
             .map((user) => ({
-              ...user, // Spread the existing user properties
-              isSelected: false, // Add the new field
+              ...user,
+              isSelected: false,
             }))
             .sort((a, b) => new Date(b.lastSeen) - new Date(a.lastSeen));
           setUsers(updatedUsers);
@@ -73,7 +72,6 @@ const Home = () => {
       } catch (error) {
         console.error(error.error);
         toast.error(error.error);
-        // navigate("/login");
       }
     };
 
@@ -114,7 +112,6 @@ const Home = () => {
     } catch (error) {
       console.error(error.error);
       toast.error(error.error);
-      // navigate("/login");
     } finally {
       setLoading(false);
     }
@@ -158,7 +155,6 @@ const Home = () => {
     } catch (error) {
       console.error(error.error);
       toast.error(error.error);
-      // navigate("/login");
     } finally {
       setLoading(false);
     }
@@ -202,7 +198,6 @@ const Home = () => {
     } catch (error) {
       console.error(error.error);
       toast.error(error.error);
-      // navigate("/login");
     } finally {
       setLoading(false);
     }

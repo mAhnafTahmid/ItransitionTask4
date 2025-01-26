@@ -10,18 +10,16 @@ public class UserService(MyDbContext context) : IUserService
 
     public async Task<UserModel?> GetUserByIdAsync(int id)
     {
-        // Fetch the user with the specified ID
         return await _context.Users.FindAsync(id);
     }
 
     public async Task<bool> DeleteUsersAsync(List<int> userIds)
     {
-        // Fetch users to delete
         var usersToDelete = await _context.Users.Where(u => userIds.Contains(u.Id)).ToListAsync();
 
         if (usersToDelete.Count == 0)
         {
-            return false; // No users found to delete
+            return false;
         }
 
         _context.Users.RemoveRange(usersToDelete);
@@ -31,15 +29,13 @@ public class UserService(MyDbContext context) : IUserService
 
     public async Task<bool> UpdateUserStatusAsync(List<int> userIds, string status)
     {
-        // Fetch users to update
         var usersToUpdate = await _context.Users.Where(u => userIds.Contains(u.Id)).ToListAsync();
 
         if (usersToUpdate.Count == 0)
         {
-            return false; // No users found to update
+            return false;
         }
 
-        // Update the status
         foreach (var user in usersToUpdate)
         {
             user.Status = status;
@@ -48,8 +44,6 @@ public class UserService(MyDbContext context) : IUserService
         await _context.SaveChangesAsync();
         return true;
     }
-
-
 
     public async Task<List<UserModel>> GetAllUsersAsync()
     {
@@ -66,13 +60,13 @@ public class UserService(MyDbContext context) : IUserService
     {
         try
         {
-            _context.Users.Update(user); // Assuming `_dbContext.Users` is your DbSet<UserModel>
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
             return true;
         }
         catch (Exception ex)
         {
-            // Log the exception for debugging purposes
+
             Console.WriteLine(ex.Message);
             return false;
         }

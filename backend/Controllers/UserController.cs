@@ -17,7 +17,6 @@ public class UserController(MyDbContext context, IUserService userService) : Con
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] RegisterUserRequest request)
     {
-        // Create a new user object
         var newUser = new UserModel
         {
             Name = request.Name,
@@ -125,7 +124,7 @@ public class UserController(MyDbContext context, IUserService userService) : Con
         var users = await _userService.GetAllUsersAsync();
         if (users != null && users.Any())
         {
-            return Ok(users); // Return the list of users
+            return Ok(users);
         }
 
         return NotFound(new { Error = "No users found." });
@@ -141,8 +140,7 @@ public class UserController(MyDbContext context, IUserService userService) : Con
             return NotFound(new { Error = "User not found." });
         }
         user.LastSeen = DateTime.UtcNow;
-        var updateSuccess = await _userService.UpdateUserAsync(user); // Ensure this method is implemented
-
+        var updateSuccess = await _userService.UpdateUserAsync(user);
         if (!updateSuccess)
         {
             return StatusCode(500, new { Error = "Failed to update user's last seen time." });
@@ -152,7 +150,6 @@ public class UserController(MyDbContext context, IUserService userService) : Con
 
 }
 
-// Request model for user registration
 public class RegisterUserRequest
 {
     public required string Name { get; set; }
