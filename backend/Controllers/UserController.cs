@@ -22,29 +22,25 @@ public class UserController(MyDbContext context, IUserService userService) : Con
         {
             Name = request.Name,
             Email = request.Email,
-            LastSeen = DateTime.UtcNow, // Set the current UTC time
-            Password = request.Password, // Set a default password
-            Status = "active" // Set the default status
+            LastSeen = DateTime.UtcNow,
+            Password = request.Password,
+            Status = "active"
         };
 
         try
         {
-            // Add user to the database
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            // Return success response
             return Ok(new { Message = "User registered successfully!" });
         }
         catch (DbUpdateException ex)
         {
-            // Check if the exception is due to a unique constraint violation
             if (ex.InnerException?.Message.Contains("duplicate key") == true)
             {
                 return Conflict(new { Error = "A user with this email already exists." });
             }
 
-            // Handle other database errors
             return StatusCode(500, new { Error = "An error occurred while registering the user." });
         }
     }
