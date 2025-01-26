@@ -1,0 +1,29 @@
+**Task #4 (ALL GROUPS) **
+
+Use language and platform **FOR YOU GROUP**: 
+
+* JavaScript or TypeScript, React, PostgreSQL or MySQL or any database (see below),
+* C#, .NET, some kind ASP.NET, SQL Server or any database,
+* PHP, Symfony, PostgreSQL or MySQL or any database (see below).
+
+THE FIRST REQIUREMENT: YOU NEED TO CREATE A UNIQUE INDEX IN DATABASE.
+
+THE SECOND REQUIREMENT: YOUR TABLE SHOULD LOOK LIKE TABLE AND YOUR TOOLBAR SHOULD LOOK LIKE TOOLBAR.
+
+THE THIRD REQUIREMENT: DATA IN THE TABLE SHOULD BE SORTED (E.G., BY THE LAST LOGIN TIME).
+
+THE FOURTH REQUIREMENT: MULTIPLE SELECTION SHOULD BE IMPLEMENTED USING CHECKBOXES (SELECT ALL/DELECT ALL IS ALSO A CHECKBOX).
+
+THE FIFTH REQUIREMENT: BEFORE EACH REQUEST EXCEPT FOR REGISTRATION OR LOGIN, SERVER SHOULD CHECK IF USER EXISTS AND ISN'T BLOCKED (if user account is blocked or deleted, any next user’s request should redirect to the login page).
+
+Create a _working and deployed (remotely accessible)_ Web application with user registration and authentication.
+
+Non-authenticated users should not have access to the user management (admin panel). They have only access to login form or registration form.
+
+Only authenticated users should have access the user management **table** with at least the following fields: (selection checkbox), name, e-mail, last login time (or the last “activity” time or both), status (active/blocked). You also may add registration time, some sparkline for activity, etc. (optional).
+
+**The leftmost column** of the table should contains checkboxes without labels for multiple selection (table header contains _only checkbox without label that selects or deselects all the records_).
+
+There must be a **toolbar** over the table with the following actions: Block (button with text), Unblock (icon), Delete (icon). NO BUTTONS IN EACH ROW.
+
+You have to use any **CSS framework** (Bootstrap is recommended, but you can choose any CSS framework).
