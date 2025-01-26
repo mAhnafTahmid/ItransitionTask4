@@ -147,7 +147,7 @@ const Home = () => {
         toast.success("The selected users have been blocked.");
         setUsers((prev) =>
           prev.map((user) =>
-            user.isSelected === true ? { ...user, status: "block" } : user
+            user.isSelected === true ? { ...user, status: "blocked" } : user
           )
         );
         fetchUser();
